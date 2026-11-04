@@ -786,7 +786,7 @@ h3 { font-size: 22px; }
 </section>
 
 <!-- 14 · 3 LAYERS -->
-<section class="slide jep" data-title="Three-layer model" data-notes="Three layers, each catching a different kind of problem. Layer 1 classifies the unit into nine load regimes and checks each sensor against that regime's normal envelope. Layer 2 runs an Isolation Forest per subsystem and per regime, so it learns how mills, burners, air, feedwater and flue gas normally behave together - and SHAP tells us which sensors pushed the score. Layer 3 predicts the expected output from the sensors; when the residual drifts, something like fouling or calibration is degrading slowly.">
+<section class="slide jep" data-title="Three-layer model" data-notes="Three layers, each catching a different kind of problem. Layer 1 classifies the unit into nine load regimes and checks each sensor against that regime's normal envelope. Layer 2 runs an Isolation Forest per subsystem and per regime, so it learns how metal temperature, steam, fuel mill, air draft and thermal sensors normally behave together - and SHAP tells us which sensors pushed the score. Layer 3 predicts the expected output from the sensors; when the residual drifts, something like fouling or calibration is degrading slowly.">
   <div class="kicker in"><span class="dot"></span>JEP · Model</div>
   <h2 class="in d1">Three layers, three kinds of problem</h2>
   <div class="body" style="display:flex; flex-direction:column; gap:14px">
@@ -802,7 +802,7 @@ h3 { font-size: 22px; }
       <div class="lno">L2<small>SUBSYSTEM</small></div>
       <div>
         <h3>Subsystem Isolation Forests + SHAP</h3>
-        <p>One model per <b>subsystem × regime</b>: burners, mills A–F, combustion air, feedwater, flue gas. Learns how sensors normally move together; SHAP names the top contributing sensors.</p>
+        <p>One model per <b>subsystem × regime</b>: metal temperature, steam, fuel mill, air draft, thermal. Learns how sensors normally move together; SHAP names the top contributing sensors.</p>
         <div class="out">Catches → <b>broken physical relationships</b> inside a subsystem</div>
       </div>
     </div>
@@ -824,7 +824,7 @@ h3 { font-size: 22px; }
   <div class="body grid" style="grid-template-columns: 1.1fr .9fr; gap:24px">
     <div class="card in d2" style="border-left:3px solid var(--amber)">
       <div style="display:flex; justify-content:space-between; align-items:center">
-        <div class="tag" style="margin:0">Anomaly · Unit 20 · Mills · Layer 2</div>
+        <div class="tag" style="margin:0">Anomaly · Unit 20 · Fuel mill · Layer 2</div>
         <span class="chip" style="border-color:rgba(255,90,106,.5); color:var(--red); padding:4px 10px; font-size:12px">ANOMALY</span>
       </div>
       <h3 style="margin-top:14px">Top contributing sensors (SHAP)</h3>
