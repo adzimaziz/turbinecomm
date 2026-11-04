@@ -14,6 +14,7 @@ Practical use cases and insights from two in-house systems:
 | `index.html` | The 15-minute deck (9 slides). One self-contained file that works offline. |
 | `Paper1_Digitalizing_Genco_OM_full.html` | Full 19-slide version, kept as a backup for Q&A. |
 | `icons/` | The 12 transparent 3D icons used in the deck. |
+| [`SCRIPT.md`](SCRIPT.md) | Full speaking script for every slide (Bahasa Melayu with English terms), timings, what to tap, and Q&A prep. |
 
 ## Install as an app (tablet / phone)
 
