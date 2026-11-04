@@ -14,16 +14,28 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// cache first: the deck must open with no network at the venue
+function keep(req, res) {
+  if (res.ok && new URL(req.url).origin === location.origin) {
+    const copy = res.clone();
+    caches.open(CACHE).then((c) => c.put(req, copy));
+  }
+  return res;
+}
+
+// The deck page: network first, so an online open always shows the latest push;
+// no network (or slower than 4 s at the venue) falls back to the cached copy.
+function page(req) {
+  const cached = () => caches.match(req, { ignoreSearch: true }).then((hit) => hit || caches.match('./index.html'));
+  const net = fetch(req).then((res) => keep(req, res));
+  const slow = new Promise((resolve) => setTimeout(resolve, 4000)).then(cached);
+  return Promise.race([net, slow]).then((res) => res || net).catch(() => cached());
+}
+
+// everything else (manifest, icons, other files): cache first
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
+  if (e.request.mode === 'navigate') { e.respondWith(page(e.request)); return; }
   e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then((hit) => hit || fetch(e.request).then((res) => {
-      if (res.ok && new URL(e.request.url).origin === location.origin) {
-        const copy = res.clone();
-        caches.open(CACHE).then((c) => c.put(e.request, copy));
-      }
-      return res;
-    }))
+    caches.match(e.request, { ignoreSearch: true }).then((hit) => hit || fetch(e.request).then((res) => keep(e.request, res)))
   );
 });
