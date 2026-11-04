@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070b11">
+<title>Skrip · Paper 1</title>
+<script>
+  // own day / night choice; falls back to the device setting
+  try {
+    var t = localStorage.getItem('scriptTheme');
+    if (!t) t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) {}
+</script>
+<style>
+:root {
+  --bg: #070b11; --panel: #0e151f; --panel2: rgba(255,255,255,.06); --line: rgba(255,255,255,.12);
+  --ink: #eef3f8; --ink2: #cfd8e3; --muted: #93a1b4;
+  --cyan: #19d3f5; --amber: #ffb547; --violet: #b18cff; --green: #3ddc97;
+  --sans: "Segoe UI", Roboto, "Samsung One", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", Consolas, "Roboto Mono", ui-monospace, monospace;
+  --fs: 19px;
+}
+:root[data-theme="light"] {
+  --bg: #eef2f6; --panel: #ffffff; --panel2: rgba(15,23,42,.05); --line: rgba(15,23,42,.13);
+  --ink: #0f172a; --ink2: #334155; --muted: #526075;
+  --cyan: #0284a8; --amber: #c26a00; --violet: #6d3fd8; --green: #078a5b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: var(--fs); line-height: 1.6; -webkit-text-size-adjust: 100%; }
+a { color: var(--cyan); }
+.bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.bar nav { display: flex; gap: 6px; overflow-x: auto; flex: 1; scrollbar-width: none; }
+.bar nav::-webkit-scrollbar { display: none; }
+.bar nav a, .bar button { flex: none; display: inline-grid; place-items: center; min-width: 40px; height: 38px; padding: 0 12px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink); text-decoration: none; font: 600 14px var(--mono); cursor: pointer;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
+.bar nav a.on { border-color: var(--cyan); color: var(--cyan); }
+.tools { display: flex; gap: 6px; }
+main { max-width: 860px; margin: 0 auto; padding: 24px 16px 80px; }
+.top h1 { font-size: 1.7em; line-height: 1.2; margin: 6px 0 10px; letter-spacing: -.01em; }
+.top p { color: var(--ink2); margin: 6px 0; }
+.top blockquote { margin: 16px 0; padding: 12px 16px; border-left: 3px solid var(--amber); background: var(--panel2); }
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .85em; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font: 600 .78em var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.card { margin: 22px 0; padding: 22px 22px 18px; background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--cyan);
+  clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+.card h2 { font-size: 1.25em; line-height: 1.3; margin: 0 0 10px; }
+.card h2 em { color: var(--cyan); font-style: normal; }
+.time { display: inline-block; margin: 2px 0 6px; padding: 3px 10px; font: 600 .75em var(--mono); color: var(--amber);
+  border: 1px solid color-mix(in srgb, var(--amber) 50%, transparent); }
+.lbl { margin: 16px 0 6px; font: 700 .72em var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.lbl.act { color: var(--violet); }
+.lbl.say { color: var(--green); }
+.lbl.act + ul, .act-one { margin: 0; padding: 10px 14px 10px 32px; background: var(--panel2); color: var(--ink2); font-size: .88em; }
+.act-one { padding-left: 14px; }
+.card blockquote { margin: 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--green); }
+.card blockquote p { margin: 0 0 14px; font-size: 1.08em; line-height: 1.65; }
+.card blockquote ul { margin: -6px 0 14px; }
+.card blockquote li { margin: 4px 0; font-size: 1.05em; }
+strong { color: var(--ink); }
+#qa h3, #qa p strong { color: var(--cyan); }
+#qa blockquote { border-left-color: var(--cyan); }
+#qa blockquote p { font-size: 1em; }
+.foot { margin-top: 40px; color: var(--muted); font-size: .8em; text-align: center; }
+@media (max-width: 600px) { :root { --fs: 17px; } .card { padding: 18px 16px 14px; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <nav aria-label="Jump to slide"><a href="#s1" title="Title: Digitalizing Genco O&amp;M">1</a><a href="#s2" title="The data already exists. Turning it into a decision is the hard part.">2</a><a href="#s3" title="Broad and deep">3</a><a href="#s4" title="One portal, the whole plant">4</a><a href="#s5" title="Four jobs, one sign-in">5</a><a href="#s6" title="Catch boiler faults as a pattern, not an alarm">6</a><a href="#s7" title="From a score to a sentence an operator can act on">7</a><a href="#s8" title="What we learned">8</a><a href="#s9" title="Let&#x27;s see it live">9</a><a href="#qa" title="Persediaan Q&amp;A">Q&amp;A</a><a href="#kawalan" title="Kawalan semasa present">Kawalan</a></nav>
+  <div class="tools">
+    <button id="smaller" aria-label="Smaller text">A−</button>
+    <button id="bigger" aria-label="Bigger text">A+</button>
+    <button id="theme" aria-label="Day or night mode">☀</button>
+  </div>
+</div>
+<main>
+  <div class="top"><h1>Skrip Pembentangan — Paper 1: Digitalizing Genco O&amp;M</h1>
+<p>GT &amp; ST Community · Day 1 · 11:00 · Presenter: TED-DD</p>
+<p><strong>Format:</strong> 15 minit slide (9 slide, lebih kurang 14 minit) + 15 minit live demo.
+<strong>Bahasa:</strong> Bahasa Melayu, istilah teknikal dalam English seperti yang biasa digunakan di plant.</p>
+<blockquote>
+<p><strong>Sebelum mula:</strong> buka deck, masukkan PIN, tekan <strong>⛶</strong> (fullscreen). Pilih <strong>night mode</strong> untuk dewan gelap, <strong>day mode</strong> untuk dewan terang atau projector yang malap.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Slide</th>
+<th>Masa</th>
+<th>Kumulatif</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Title</td>
+<td>0:30</td>
+<td>0:30</td>
+</tr>
+<tr>
+<td>2</td>
+<td>The O&amp;M reality</td>
+<td>1:30</td>
+<td>2:00</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Broad and deep</td>
+<td>1:00</td>
+<td>3:00</td>
+</tr>
+<tr>
+<td>4</td>
+<td>One portal, the whole plant</td>
+<td>2:00</td>
+<td>5:00</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Four jobs, one sign-in</td>
+<td>3:00</td>
+<td>8:00</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Catch boiler faults as a pattern</td>
+<td>2:30</td>
+<td>10:30</td>
+</tr>
+<tr>
+<td>7</td>
+<td>From a score to a sentence</td>
+<td>2:00</td>
+<td>12:30</td>
+</tr>
+<tr>
+<td>8</td>
+<td>What we learned</td>
+<td>1:30</td>
+<td>14:00</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Let's see it live</td>
+<td>0:30</td>
+<td>14:30</td>
+</tr>
+</tbody>
+</table></div>
+  <section id="s1" class="card slide"><h2>Slide 1 — Title: <em>Digitalizing Genco O&amp;M</em></h2>
+<div class="time">⏱ ~30 saat</div>
+<div class="lbl act">Tindakan</div>
+<ul>
+<li>Biarkan 3D plant berpusing sendiri semasa memperkenalkan diri.</li>
+<li>(Pilihan) Seret plant sekali untuk tunjuk ia interaktif. Jangan lama.</li>
+</ul>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Assalamualaikum dan selamat pagi semua.</p>
+<p>Saya dari TED, dan Paper 1 hari ini bertajuk <strong>Digitalizing Genco O&amp;M — Practical Use Cases and Insights</strong>.</p>
+<p>Saya tak akan bercakap tentang digitalisation sebagai konsep. Saya nak tunjuk dua sistem yang <strong>sudah berjalan</strong>: <strong>SJSAS Smart Plant</strong> di Manjung, dan <strong>JEP Boiler Anomaly Detection</strong> di Jimah East.</p>
+<p>Model 3D yang anda nampak ni adalah plant SJSAS yang sebenar — landing page sistem tu sendiri.</p>
+<p>Saya akan ambil lebih kurang 15 minit untuk overview, kemudian 15 minit lagi untuk <strong>live demo</strong>.</p>
+</blockquote></section>
+  <section id="s2" class="card slide"><h2>Slide 2 — <em>The data already exists. Turning it into a decision is the hard part.</em></h2>
+<div class="time">⏱ ~1 min 30 saat</div>
+<div class="lbl act">Tindakan</div><p class="act-one">(Pilihan) keluarkan ADAbot (red dot) dan tap setiap kad semasa menerangkannya.</p>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Mari kita mula dengan realiti O&amp;M hari ini.</p>
+<p><strong>Pertama — data in silos.</strong> Sebenarnya hampir semua data yang kita perlukan dah wujud. Ada dalam <strong>PI historian</strong>, dalam <strong>GOMS</strong> untuk planned dan unplanned outage, dalam <strong>coal certificate database</strong>, dan dalam banyak <strong>Excel file</strong> — stockyard, UOR, correction factor. Masalahnya, semua ni duduk di tempat yang berbeza.</p>
+<p><strong>Kedua — stitched by hand.</strong> Setiap pagi ada orang yang compile <strong>daily report</strong> secara manual. Rekod GOMS dan rekod station lama-kelamaan tak sama. <strong>Heat-rate deviation</strong> selalunya diterangkan <em>selepas</em> ia berlaku. Dan untuk <strong>coal blending</strong>, kita scan table yang besar dengan mata.</p>
+<p><strong>Ketiga — one tag at a time.</strong> Alarm kita kebanyakannya <strong>fixed, single-tag limit</strong>. Tapi masalah boiler seperti <strong>mill choking</strong>, <strong>slagging</strong> dan <strong>fouling</strong> tak bermula dengan satu tag melepasi had. Ia bermula sebagai beberapa sensor yang <strong>berubah bersama-sama</strong>. Bila satu tag akhirnya trip, event tu dah pun berlaku.</p>
+<p>Jadi, data dah ada. <strong>Yang susah ialah tukar data tu kepada keputusan — sebelum shift habis.</strong></p>
+</blockquote></section>
+  <section id="s3" class="card slide"><h2>Slide 3 — <em>Broad and deep</em></h2>
+<div class="time">⏱ ~1 minit</div>
+<div class="lbl act">Tindakan</div><p class="act-one">Tap kad SJSAS kemudian kad JEP dengan laser (jika ADAbot keluar).</p>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Untuk itu kita ada dua use case, dengan dua pendekatan yang berbeza.</p>
+<p><strong>Use case A — SJSAS Smart Plant — adalah <em>broad</em>.</strong> Satu <strong>plant-wide O&amp;M portal</strong> untuk Manjung: GF1 iaitu M1 hingga M3, GF2 atau M4, dan M5. Di dalamnya ada daily performance, reliability, <strong>coal and fuel advisors</strong>, dan satu <strong>AI assistant</strong>, semuanya di belakang <strong>satu TNB sign-in</strong>.</p>
+<p><strong>Use case B — JEP Boiler Anomaly Detection — adalah <em>deep</em>.</strong> Fokus pada satu masalah sahaja: <strong>combustion anomaly</strong> di Jimah East, Unit 10 dan 20. Lebih kurang <strong>141 PI tag</strong>, melalui <strong>3-layer AI model</strong> yang bukan sahaja flag anomali, tapi <strong>terangkan dalam bahasa engineering</strong>.</p>
+<p>Kedua-duanya dibina <strong>in-house</strong>, guna data yang plant memang dah percaya — PI, GOMS, dan fail station sendiri.</p>
+</blockquote></section>
+  <section id="s4" class="card slide"><h2>Slide 4 — <em>One portal, the whole plant</em></h2>
+<div class="time">⏱ ~2 minit</div>
+<div class="lbl act">Tindakan</div>
+<ul>
+<li><strong>Seret</strong> model 3D untuk pusing plant. Di tablet, condongkan tablet (<strong>gyroscope</strong>).</li>
+<li>Dengan ADAbot keluar, tap label <strong>GF1</strong>, <strong>M5</strong>, <strong>Coal Stock Yard</strong>, <strong>Demurrage</strong> satu per satu.</li>
+<li>Kemudian tap kad modul di sebelah kanan.</li>
+</ul>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Ini landing page SJSAS Smart Plant. Bila user sign in, mereka masuk ke <strong>model 3D plant</strong> ni.</p>
+<p>Setiap <strong>hotspot</strong> adalah pintu masuk ke bahagian plant tu: <strong>GF1</strong>, <strong>GF2</strong>, <strong>M5</strong>, <strong>Coal Stock Yard</strong>, dan <strong>Demurrage</strong> di jetty. Tekan GF1, anda terus ke dashboard GF1. Tekan M5, anda masuk ke <strong>Coal Fineness Advisor</strong>.</p>
+<p>Di belakang model ni ada <strong>empat kumpulan modul</strong>:</p>
+<ul>
+<li><strong>Performance</strong> — Daily Summary, Trends, dan <strong>expected heat-rate model</strong>.</li>
+<li><strong>Reliability</strong> — <strong>UOR dan EUOF</strong>, <strong>outage risk</strong>, <strong>failure modes</strong>, dan <strong>reconciliation</strong>.</li>
+<li><strong>Fuel</strong> — coal database, <strong>Blend Advisor</strong>, <strong>M5 Fineness Advisor</strong>, stock yard, dan demurrage.</li>
+<li><strong>AI</strong> — <strong>ADAbot</strong> chat, <strong>Daily Brief</strong>, dan <strong>Telegram bot</strong>.</li>
+</ul>
+<p>Dan semua ni guna <strong>satu sign-in — TNB Active Directory account</strong>. Password disemak terus dengan AD dan <strong>tidak disimpan</strong> oleh sistem.</p>
+</blockquote></section>
+  <section id="s5" class="card slide"><h2>Slide 5 — <em>Four jobs, one sign-in</em></h2>
+<div class="time">⏱ ~3 minit (slide paling panjang — ambil masa di sini)</div>
+<div class="lbl act">Tindakan</div><p class="act-one">Dengan ADAbot keluar, tap <strong>setiap bullet</strong> semasa menerangkannya (laser highlight satu bullet pada satu masa).</p>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Mari kita tengok apa yang setiap modul buat.</p>
+<p><strong>Performance.</strong> Setiap pagi, pada <strong>09:22</strong>, pipeline kita tarik data PI 30 hari, fail stockyard dan coal database, dan kira <strong>heat rate dan efficiency</strong> bagi setiap unit. Jadi bila <strong>morning meeting</strong> bermula, nombor dah siap. Kita juga ada <strong>expected heat-rate model</strong> — model <strong>gradient boosting</strong> yang belajar dari sejarah plant sendiri. Ia flag hari-hari di mana heat rate <strong>tak boleh diterangkan</strong> oleh load, kualiti arang, condenser atau make-up.</p>
+<p><strong>Reliability.</strong> Kita track <strong>UOR dan EUOF</strong> bagi setiap unit, dan kita buat <strong>reconciliation</strong> antara GOMS dengan fail UOR station sendiri — setiap perbezaan disenaraikan: masa tamat yang lain, MW loss yang lain, event yang ada di satu pihak sahaja. Kemudian ada <strong>Monte Carlo forecast</strong> untuk UOR — bukan satu nombor, tapi <strong>P10, P50 dan P90</strong> untuk 365 hari akan datang.</p>
+<p><strong>Fuel.</strong> <strong>Blend Advisor</strong> — dengan 10 jenis arang, ada <strong>315 kombinasi pair dan ratio</strong>. Tiada siapa boleh baca semua tu dengan mata. Jadi advisor ni kira <strong>slagging, fouling dan ash index</strong> untuk setiap blend, semak dengan <strong>boiler operating limits</strong>, dan <strong>susun</strong> dari yang terbaik. <strong>M5 Fineness Advisor</strong> pula ramal <strong>coal fineness</strong> dari setting mill dan sifat arang, dan cadangkan setting mill untuk capai target. Ia <strong>advisory sahaja</strong> — engineer yang buat keputusan.</p>
+<p><strong>AI — ADAbot.</strong> User boleh tanya data dalam <strong>bahasa biasa</strong>, di web atau Telegram. Contohnya: "UOR GF1 hari ni?" Dan prinsip paling penting di sini: <strong>the LLM never computes a number</strong>. Model AI hanya pilih <strong>tool</strong> mana yang perlu dipanggil. <strong>Backend</strong> yang kira semua nombor dari data sebenar. Kemudian barulah model tulis jawapan guna keputusan tu. Jadi tiada nombor yang direka.</p>
+</blockquote></section>
+  <section id="s6" class="card slide"><h2>Slide 6 — <em>Catch boiler faults as a pattern, not an alarm</em></h2>
+<div class="time">⏱ ~2 min 30 saat</div>
+<div class="lbl act">Tindakan</div>
+<ul>
+<li>Tap kad <strong>L1</strong> → popup graf keluar. Terangkan, kemudian tutup (✕ atau tap luar).</li>
+<li>Ulang untuk <strong>L2</strong> dan <strong>L3</strong>.</li>
+<li>Jika ADAbot keluar: tekan butang <strong>▶ See example</strong>, kemudian tap <strong>titik merah</strong> dalam graf dengan laser.</li>
+</ul>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Sekarang kita pergi ke JEP. Soalannya berbeza: masalah boiler seperti mill choking, slagging dan fouling muncul sebagai <strong>sensor yang berhenti bergerak bersama</strong>, lama sebelum satu tag trip alarm.</p>
+<p>Data: <strong>Unit 10 dan 20</strong>, lebih kurang <strong>141 PI tag</strong>, data setiap <strong>5 minit</strong>, <strong>sync setiap jam</strong>. Dan kita guna <strong>tiga layer</strong>.</p>
+<p><strong>Layer 1 — Normal for this load?</strong> <em>(buka graf L1)</em> Setiap sensor disemak dengan <strong>envelope</strong> normalnya, mengikut <strong>MW regime</strong> semasa — ada 9 regime, dari startup sampai high load. Tengok contoh ni: <strong>72°C adalah normal pada base load, tapi abnormal pada part load.</strong> Bacaan yang sama, keputusan yang berbeza. Itu yang L1 tangkap — <strong>single-sensor excursion</strong> yang abnormal <em>untuk load tu</em>.</p>
+<p><strong>Layer 2 — Still moving together?</strong> <em>(buka graf L2)</em> Di sini kita guna <strong>Isolation Forest</strong> bagi setiap <strong>subsystem</strong>: <strong>metal temperature, steam, fuel mill, air draft, dan thermal</strong>. Model belajar macam mana sensor-sensor ni <strong>biasanya bergerak bersama</strong>. Dalam contoh ni, setiap titik adalah satu snapshot 5 minit Mill C. Biasanya, bila coal flow naik, <strong>mill DP</strong> naik sekali. Titik merah ni — <strong>coal flow normal, tapi DP tinggi</strong>. Itu tanda <strong>choking atau arang basah</strong>. Dan perhatikan: <strong>tiada satu tag pun yang melepasi had alarm</strong>. Itu <strong>broken relationship</strong> yang L2 tangkap.</p>
+<p><strong>Layer 3 — Drifting slowly?</strong> <em>(buka graf L3)</em> Model ramal <strong>expected output</strong> unit dari sensor-sensornya, dan kita bandingkan dengan <strong>actual</strong>. Jurang ni membesar perlahan selama berminggu-minggu — terlalu perlahan untuk perasan dari hari ke hari — sampai <strong>residual melepasi −2σ</strong> dan di-flag. Ini corak tipikal <strong>fouling</strong> atau <strong>calibration drift</strong>.</p>
+<p>Graf-graf ni adalah <strong>contoh ilustrasi</strong>, bukan data plant sebenar — tapi itulah logik setiap layer.</p>
+</blockquote></section>
+  <section id="s7" class="card slide"><h2>Slide 7 — <em>From a score to a sentence an operator can act on</em></h2>
+<div class="time">⏱ ~2 minit</div>
+<div class="lbl act">Tindakan</div><p class="act-one">Dengan ADAbot keluar, tap <strong>bar SHAP</strong> satu per satu, kemudian tap ayat insight di bawah.</p>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Tapi model yang bagi <strong>skor</strong> sahaja tak berguna kepada operator. "Anomaly score −0.31" — operator nak buat apa dengan nombor tu?</p>
+<p>Jadi setiap anomali Layer 2 kita terangkan guna <strong>SHAP</strong> — <strong>SHapley Additive exPlanations</strong>. SHAP kira <strong>berapa banyak setiap sensor menyumbang</strong> kepada skor anomali tu.</p>
+<p>Dalam contoh ni, Unit 20, subsystem <strong>fuel mill</strong>:</p>
+<ul>
+<li>Penyumbang nombor satu: <strong>Mill C DP naik</strong>.</li>
+<li>Nombor dua: <strong>Mill C outlet temperature turun</strong>.</li>
+<li>Nombor tiga: <strong>coal flow C naik</strong>.</li>
+</ul>
+<p>Kemudian <strong>insight engine</strong> kita tukar maklumat ni jadi ayat engineering: <em>"High Mill C DP strongly suggests a mill blockage, choking, or poor coal quality — high moisture or ash."</em></p>
+<p>Dan dashboard dibina untuk <strong>control room</strong>: tekan sensor, terus lompat ke <strong>trend</strong> sensor tu, dengan <strong>MW load context</strong> pada setiap chart, dan ada <strong>live anomaly feed</strong> bagi setiap unit.</p>
+<p>Jadi operator dapat <strong>nama sensor dan sebab</strong> — bukan sekadar nombor.</p>
+</blockquote></section>
+  <section id="s8" class="card slide"><h2>Slide 8 — <em>What we learned</em></h2>
+<div class="time">⏱ ~1 min 30 saat</div>
+<div class="lbl act">Tindakan</div><p class="act-one">Tap setiap kad atau baris <strong>"In practice"</strong> dengan laser.</p>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Empat pengajaran utama, dan setiap satu datang dari benda yang kita betul-betul buat.</p>
+<p><strong>Satu — start from trusted data.</strong> Orang guna sistem bila nombor dia <strong>sama dengan apa yang mereka dah kenal</strong>. Di SJSAS, pipeline PI 09:22 yang dah terbukti, kita <strong>tak usik langsung</strong>. Dan kita reconcile GOMS dengan fail UOR station sendiri.</p>
+<p><strong>Dua — explain, or it won't be used.</strong> Nama sensor dan sebab, bukan sekadar skor. Di JEP: <em>"High Mill C DP — blockage, choking or wet coal"</em>, bukan anomaly score.</p>
+<p><strong>Tiga — the LLM writes words, not numbers.</strong> Backend kira setiap angka. ADAbot: plan tool, backend compute, model cuma tulis jawapan.</p>
+<p><strong>Empat — engineer in the loop.</strong> Advisor cadang, <strong>engineer yang putuskan</strong>. M5 advisor hanya cadangkan setting dalam julat yang dia dilatih, dan dia <strong>beritahu</strong> bila target tak boleh dicapai.</p>
+</blockquote></section>
+  <section id="s9" class="card slide"><h2>Slide 9 — <em>Let's see it live</em></h2>
+<div class="time">⏱ ~30 saat</div>
+<div class="lbl act">Tindakan</div><p class="act-one">Sembunyikan ADAbot (red dot). Tukar ke browser/tablet untuk demo.</p>
+<div class="lbl say">Skrip</div>
+<blockquote>
+<p>Itu overview-nya. Sekarang saya nak tunjuk kedua-dua sistem secara <strong>live</strong>.</p>
+<p>Untuk <strong>SJSAS</strong>, kita akan tengok <strong>3D landing</strong>, <strong>Daily Summary</strong>, <strong>fuel advisors</strong>, dan <strong>ADAbot</strong>.</p>
+<p>Untuk <strong>JEP</strong>, kita tengok <strong>anomaly feed</strong>, <strong>SHAP insight</strong>, dan <strong>sensor trend</strong>.</p>
+<p>Lepas demo, kita buka untuk <strong>Q&amp;A</strong>. Terima kasih.</p>
+</blockquote></section>
+  <section id="qa" class="card"><h2>Persediaan Q&amp;A</h2>
+<p><strong>"SHAP tu apa sebenarnya?"</strong></p>
+<blockquote>
+<p>Cara terangkan keputusan model AI. Ia bahagikan "kredit" skor anomali kepada setiap sensor — macam bahagi kredit secara adil antara ahli pasukan. Kita dapat tahu sensor mana yang paling banyak menolak skor jadi anomali, untuk <em>setiap</em> kejadian.</p>
+</blockquote>
+<p><strong>"Berapa tepat model-model ni?"</strong></p>
+<blockquote>
+<p>Bergantung pada model. Contohnya M5 Fineness Advisor: <strong>cross-validated R² sekitar 0.67, ±3.2 percentage point</strong> pada 1σ — sebab itu ia kekal <strong>advisory</strong>, dan hanya cadang dalam julat data latihan. Untuk JEP, fokus kita ialah <strong>explainability</strong> supaya engineer boleh sahkan sendiri setiap flag.</p>
+</blockquote>
+<p><strong>"False alarm macam mana?"</strong></p>
+<blockquote>
+<p>Itu sebab kita ada tiga layer dengan peranan berbeza, dan setiap flag ada <strong>penjelasan sensor</strong>. Engineer boleh nilai sendiri sama ada ia real. Langkah seterusnya ialah kumpul <strong>feedback operator</strong> pada setiap flag — real, false, atau dah diketahui — untuk tune threshold.</p>
+</blockquote>
+<p><strong>"ADAbot guna AI apa? Selamat ke?"</strong></p>
+<blockquote>
+<p>Model utama <strong>Claude Sonnet melalui Databricks</strong>, dengan <strong>Qwen yang di-host oleh ICT TNB</strong> sebagai fallback. Prinsipnya, LLM <strong>tak kira nombor</strong> — backend yang kira dari data sebenar. Untuk Telegram, hanya akaun dalam <strong>allow-list</strong> boleh guna, dan server tak buka port.</p>
+</blockquote>
+<p><strong>"Data security / access?"</strong></p>
+<blockquote>
+<p>Sign-in guna <strong>TNB Active Directory</strong>. Password tak disimpan. JEP ada <strong>audit log</strong> untuk setiap sign-in dan tindakan. Sistem berjalan dalam <strong>rangkaian TNB</strong>.</p>
+</blockquote>
+<p><strong>"Boleh scale ke station lain?"</strong></p>
+<blockquote>
+<p>Ya. Komponen utama dah <strong>reusable</strong> — pipeline, sign-in, ADAbot, deploy script. Itu salah satu pengajaran kita: <strong>build once, reuse</strong>.</p>
+</blockquote>
+<p><strong>"Berapa lama nak bina?" / "Siapa bina?"</strong></p>
+<blockquote>
+<p>Dibina <strong>in-house</strong> oleh team, dan disimpan dalam <strong>GitHub</strong> dengan version control.</p>
+</blockquote></section>
+  <section id="kawalan" class="card"><h2>Kawalan semasa present (rujukan pantas)</h2>
+<table>
+<thead>
+<tr>
+<th>Tindakan</th>
+<th>Sentuh</th>
+<th>Keyboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slide seterusnya / sebelum</td>
+<td>swipe, atau tap tepi kanan / kiri</td>
+<td>→ / ←</td>
+</tr>
+<tr>
+<td>Senarai semua slide</td>
+<td>tap nombor slide</td>
+<td>O</td>
+</tr>
+<tr>
+<td>Speaker notes</td>
+<td>butang <strong>N</strong></td>
+<td>N</td>
+</tr>
+<tr>
+<td>Day / night mode</td>
+<td>☀ / ☾</td>
+<td>T</td>
+</tr>
+<tr>
+<td>ADAbot keluar / masuk</td>
+<td><strong>red dot</strong></td>
+<td>A</td>
+</tr>
+<tr>
+<td>Laser ADAbot</td>
+<td>tap kad, bullet, chip, label 3D</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Buang highlight laser</td>
+<td>tap ruang kosong</td>
+<td>Esc</td>
+</tr>
+<tr>
+<td>Contoh graf (slide 6)</td>
+<td>tap kad L1 / L2 / L3 atau <strong>▶ See example</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Pusing plant 3D</td>
+<td>seret, atau condongkan tablet</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></section>
+  <p class="foot">Dijana dari SCRIPT.md</p>
+</main>
+<script>
+(function () {
+  var root = document.documentElement, size = 19;
+  try { size = parseInt(localStorage.getItem('scriptSize'), 10) || 19; } catch (e) {}
+  function setSize(n) {
+    size = Math.max(14, Math.min(28, n));
+    root.style.setProperty('--fs', size + 'px');
+    try { localStorage.setItem('scriptSize', size); } catch (e) {}
+  }
+  if (size !== 19) setSize(size);
+  document.getElementById('smaller').onclick = function () { setSize(size - 1); };
+  document.getElementById('bigger').onclick = function () { setSize(size + 1); };
+  var tb = document.getElementById('theme');
+  function syncTheme() { tb.textContent = root.getAttribute('data-theme') === 'light' ? '☾' : '☀'; }
+  tb.onclick = function () {
+    var light = root.getAttribute('data-theme') !== 'light';
+    if (light) root.setAttribute('data-theme', 'light'); else root.removeAttribute('data-theme');
+    try { localStorage.setItem('scriptTheme', light ? 'light' : 'dark'); } catch (e) {}
+    syncTheme();
+  };
+  syncTheme();
+  // highlight the section in view
+  var nav = document.querySelector('.bar nav'), links = nav.querySelectorAll('a');
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + e.target.id;
+        a.classList.toggle('on', on);
+        // keep the active chip visible by moving the chip bar only, never the page
+        if (on) nav.scrollLeft = a.offsetLeft - nav.clientWidth / 2 + a.offsetWidth / 2;
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('main section').forEach(function (s) { io.observe(s); });
+})();
+</script>
+</body>
+</html>
