@@ -15,6 +15,16 @@ Practical use cases and insights from two in-house systems:
 | `Paper1_Digitalizing_Genco_OM_full.html` | Full 19-slide version, kept as a backup for Q&A. |
 | `icons/` | The 12 transparent 3D icons used in the deck. |
 
+## Install as an app (tablet / phone)
+
+Live at **https://adzimaziz.github.io/turbinecomm/** (GitHub Pages).
+
+1. Open the link in **Chrome** (Android) or **Samsung Internet** and enter the PIN once.
+2. Chrome: **⋮ → Install app** (or **Add to Home screen**). Samsung Internet: **≡ → Add page to → Home screen**. iPhone / iPad: Safari **Share → Add to Home Screen**.
+3. The **Paper 1** icon opens the deck fullscreen in landscape. After the first open, everything is cached, so it **works with no internet**.
+
+Updating the deck: rebuild `index.html` and `sw.js` together (the service-worker cache name follows the deck), push, then open the app once while online to pick up the new version.
+
 ## Presenting
 
 Open `index.html` in Chrome or Samsung Internet (laptop, tablet or phone), enter the 4-digit PIN, and tap **⛶** for fullscreen. It is designed for a 16:10 landscape screen. The PIN is asked once per browser tab session.

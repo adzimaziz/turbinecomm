@@ -6,6 +6,11 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#070b11">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-title" content="Paper 1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <script>
   // apply the saved day / night choice before first paint (no flash)
   try { if (localStorage.getItem('deckTheme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
@@ -5158,6 +5163,12 @@ h3 { font-size: 22px; }
   slides[0].classList.add('active');
   go(isNaN(start) ? 0 : start - 1);
 })();
+</script>
+<script>
+  // installable + offline once opened over https (or localhost); a no-op from file://
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+  }
 </script>
 </body>
 </html>
