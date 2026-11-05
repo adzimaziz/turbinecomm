@@ -375,7 +375,7 @@ h3 { font-size: 22px; }
 (function () {
   var gate = document.getElementById('pinGate');
   // FNV-1a of "paper1:" + PIN, so the PIN itself is not written in the page
-  var KEY = 1273798391;
+  var KEY = 1550052775;
   function hash(s) {
     var x = 0x811c9dc5;
     for (var i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; }

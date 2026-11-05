@@ -34,7 +34,7 @@ Open `index.html` in Chrome or Samsung Internet (laptop, tablet or phone), enter
 |---|---|---|
 | Next / previous slide | swipe, or tap right / left edge | → / ←, Space, PageDown / PageUp |
 | All slides | tap the slide counter | O |
-| Speaker notes (with timing) | **N** button | N |
+| QR code for the audience (opens this site) | **QR** button | Q |
 | Day / night mode | ☀ / ☾ button | T |
 | Fullscreen | ⛶ button | F |
 | ADAbot on / off | red dot | A |

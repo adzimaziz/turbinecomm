@@ -200,7 +200,7 @@ GT & ST Community · Day 1 · 11:00 · Presenter: **Adzim Aziz** — Manager, Da
 
 **Masa:** ~30 saat
 
-**Tindakan:** Sembunyikan ADAbot (red dot). Tukar ke browser/tablet untuk demo.
+**Tindakan:** Sembunyikan ADAbot (red dot). (Pilihan) Tekan **QR** supaya audiens boleh scan dan buka deck di phone sendiri. Kemudian tukar ke browser/tablet untuk demo.
 
 **Skrip:**
 
@@ -245,7 +245,7 @@ GT & ST Community · Day 1 · 11:00 · Presenter: **Adzim Aziz** — Manager, Da
 |---|---|---|
 | Slide seterusnya / sebelum | swipe, atau tap tepi kanan / kiri | → / ← |
 | Senarai semua slide | tap nombor slide | O |
-| Speaker notes | butang **N** | N |
+| QR code untuk audiens (buka site ni) | butang **QR** | Q |
 | Day / night mode | ☀ / ☾ | T |
 | ADAbot keluar / masuk | **red dot** | A |
 | Laser ADAbot | tap kad, bullet, chip, label 3D | — |
