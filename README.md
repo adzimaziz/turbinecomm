@@ -1,6 +1,6 @@
 # Digitalizing Genco O&M — Paper 1
 
-GT & ST Community · Day 1 · Paper 1 · Presenter: TED-DD
+GT & ST Community · Day 1 · Paper 1 · Presenter: **Adzim Aziz**, Manager, Data Analytics, Advanced Data Analytics
 
 Practical use cases and insights from two in-house systems:
 

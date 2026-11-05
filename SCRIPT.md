@@ -1,6 +1,6 @@
 # Skrip Pembentangan — Paper 1: Digitalizing Genco O&M
 
-GT & ST Community · Day 1 · 11:00 · Presenter: TED-DD
+GT & ST Community · Day 1 · 11:00 · Presenter: **Adzim Aziz** — Manager, Data Analytics, Advanced Data Analytics
 
 **Format:** 15 minit slide (9 slide, lebih kurang 14 minit) + 15 minit live demo.
 **Bahasa:** Bahasa Melayu, istilah teknikal dalam English seperti yang biasa digunakan di plant.
@@ -33,7 +33,7 @@ GT & ST Community · Day 1 · 11:00 · Presenter: TED-DD
 
 > Assalamualaikum dan selamat pagi semua.
 >
-> Saya dari TED, dan Paper 1 hari ini bertajuk **Digitalizing Genco O&M — Practical Use Cases and Insights**.
+> Saya Adzim Aziz, Manager, Data Analytics di Advanced Data Analytics, TED. Paper 1 hari ini bertajuk **Digitalizing Genco O&M — Practical Use Cases and Insights**.
 >
 > Saya tak akan bercakap tentang digitalisation sebagai konsep. Saya nak tunjuk dua sistem yang **sudah berjalan**: **SJSAS Smart Plant** di Manjung, dan **JEP Boiler Anomaly Detection** di Jimah East.
 >
