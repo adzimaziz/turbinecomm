@@ -207,7 +207,7 @@ strong { color: var(--ink); }
 <li><strong>Performance</strong> — Daily Summary, Trends, dan <strong>expected heat-rate model</strong>.</li>
 <li><strong>Reliability</strong> — <strong>UOR dan EUOF</strong>, <strong>outage risk</strong>, <strong>failure modes</strong>, dan <strong>reconciliation</strong>.</li>
 <li><strong>Fuel</strong> — coal database, <strong>Blend Advisor</strong>, <strong>M5 Fineness Advisor</strong>, stock yard, dan demurrage.</li>
-<li><strong>AI</strong> — <strong>ADAbot</strong> chat, <strong>Daily Brief</strong>, dan <strong>Telegram bot</strong>.</li>
+<li><strong>AI</strong> — <strong>ADAbot</strong> chat dan <strong>Daily Brief</strong>.</li>
 </ul>
 <p>Dan semua ni guna <strong>satu sign-in — TNB Active Directory account</strong>. Password disemak terus dengan AD dan <strong>tidak disimpan</strong> oleh sistem.</p>
 </blockquote></section>
@@ -220,7 +220,7 @@ strong { color: var(--ink); }
 <p><strong>Performance.</strong> Setiap pagi, pada <strong>09:22</strong>, pipeline kita tarik data PI 30 hari, fail stockyard dan coal database, dan kira <strong>heat rate dan efficiency</strong> bagi setiap unit. Jadi bila <strong>morning meeting</strong> bermula, nombor dah siap. Kita juga ada <strong>expected heat-rate model</strong> — model <strong>gradient boosting</strong> yang belajar dari sejarah plant sendiri. Ia flag hari-hari di mana heat rate <strong>tak boleh diterangkan</strong> oleh load, kualiti arang, condenser atau make-up.</p>
 <p><strong>Reliability.</strong> Kita track <strong>UOR dan EUOF</strong> bagi setiap unit, dan kita buat <strong>reconciliation</strong> antara GOMS dengan fail UOR station sendiri — setiap perbezaan disenaraikan: masa tamat yang lain, MW loss yang lain, event yang ada di satu pihak sahaja. Kemudian ada <strong>Monte Carlo forecast</strong> untuk UOR — bukan satu nombor, tapi <strong>P10, P50 dan P90</strong> untuk 365 hari akan datang.</p>
 <p><strong>Fuel.</strong> <strong>Blend Advisor</strong> — dengan 10 jenis arang, ada <strong>315 kombinasi pair dan ratio</strong>. Tiada siapa boleh baca semua tu dengan mata. Jadi advisor ni kira <strong>slagging, fouling dan ash index</strong> untuk setiap blend, semak dengan <strong>boiler operating limits</strong>, dan <strong>susun</strong> dari yang terbaik. <strong>M5 Fineness Advisor</strong> pula ramal <strong>coal fineness</strong> dari setting mill dan sifat arang, dan cadangkan setting mill untuk capai target. Ia <strong>advisory sahaja</strong> — engineer yang buat keputusan.</p>
-<p><strong>AI — ADAbot.</strong> User boleh tanya data dalam <strong>bahasa biasa</strong>, di web atau Telegram. Contohnya: "UOR GF1 hari ni?" Dan prinsip paling penting di sini: <strong>the LLM never computes a number</strong>. Model AI hanya pilih <strong>tool</strong> mana yang perlu dipanggil. <strong>Backend</strong> yang kira semua nombor dari data sebenar. Kemudian barulah model tulis jawapan guna keputusan tu. Jadi tiada nombor yang direka.</p>
+<p><strong>AI — ADAbot.</strong> User boleh tanya data dalam <strong>bahasa biasa</strong>, terus dalam web app. Contohnya: "UOR GF1 hari ni?" Dan prinsip paling penting di sini: <strong>the LLM never computes a number</strong>. Model AI hanya pilih <strong>tool</strong> mana yang perlu dipanggil. <strong>Backend</strong> yang kira semua nombor dari data sebenar. Kemudian barulah model tulis jawapan guna keputusan tu. Jadi tiada nombor yang direka.</p>
 </blockquote></section>
   <section id="s6" class="card slide"><h2>Slide 6 — <em>Catch boiler faults as a pattern, not an alarm</em></h2>
 <div class="time">⏱ ~2 min 30 saat</div>
@@ -293,7 +293,7 @@ strong { color: var(--ink); }
 </blockquote>
 <p><strong>"ADAbot guna AI apa? Selamat ke?"</strong></p>
 <blockquote>
-<p>Model utama <strong>Claude Sonnet melalui Databricks</strong>, dengan <strong>Qwen yang di-host oleh ICT TNB</strong> sebagai fallback. Prinsipnya, LLM <strong>tak kira nombor</strong> — backend yang kira dari data sebenar. Untuk Telegram, hanya akaun dalam <strong>allow-list</strong> boleh guna, dan server tak buka port.</p>
+<p>Model utama <strong>Claude Sonnet melalui Databricks</strong>, dengan <strong>Qwen yang di-host oleh ICT TNB</strong> sebagai fallback. Prinsipnya, LLM <strong>tak kira nombor</strong> — backend yang kira dari data sebenar.</p>
 </blockquote>
 <p><strong>"Data security / access?"</strong></p>
 <blockquote>

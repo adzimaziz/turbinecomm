@@ -100,7 +100,7 @@ GT & ST Community · Day 1 · 11:00 · Presenter: **Adzim Aziz** — Manager, Da
 > - **Performance** — Daily Summary, Trends, dan **expected heat-rate model**.
 > - **Reliability** — **UOR dan EUOF**, **outage risk**, **failure modes**, dan **reconciliation**.
 > - **Fuel** — coal database, **Blend Advisor**, **M5 Fineness Advisor**, stock yard, dan demurrage.
-> - **AI** — **ADAbot** chat, **Daily Brief**, dan **Telegram bot**.
+> - **AI** — **ADAbot** chat dan **Daily Brief**.
 >
 > Dan semua ni guna **satu sign-in — TNB Active Directory account**. Password disemak terus dengan AD dan **tidak disimpan** oleh sistem.
 
@@ -122,7 +122,7 @@ GT & ST Community · Day 1 · 11:00 · Presenter: **Adzim Aziz** — Manager, Da
 >
 > **Fuel.** **Blend Advisor** — dengan 10 jenis arang, ada **315 kombinasi pair dan ratio**. Tiada siapa boleh baca semua tu dengan mata. Jadi advisor ni kira **slagging, fouling dan ash index** untuk setiap blend, semak dengan **boiler operating limits**, dan **susun** dari yang terbaik. **M5 Fineness Advisor** pula ramal **coal fineness** dari setting mill dan sifat arang, dan cadangkan setting mill untuk capai target. Ia **advisory sahaja** — engineer yang buat keputusan.
 >
-> **AI — ADAbot.** User boleh tanya data dalam **bahasa biasa**, di web atau Telegram. Contohnya: "UOR GF1 hari ni?" Dan prinsip paling penting di sini: **the LLM never computes a number**. Model AI hanya pilih **tool** mana yang perlu dipanggil. **Backend** yang kira semua nombor dari data sebenar. Kemudian barulah model tulis jawapan guna keputusan tu. Jadi tiada nombor yang direka.
+> **AI — ADAbot.** User boleh tanya data dalam **bahasa biasa**, terus dalam web app. Contohnya: "UOR GF1 hari ni?" Dan prinsip paling penting di sini: **the LLM never computes a number**. Model AI hanya pilih **tool** mana yang perlu dipanggil. **Backend** yang kira semua nombor dari data sebenar. Kemudian barulah model tulis jawapan guna keputusan tu. Jadi tiada nombor yang direka.
 
 ---
 
@@ -228,7 +228,7 @@ GT & ST Community · Day 1 · 11:00 · Presenter: **Adzim Aziz** — Manager, Da
 > Itu sebab kita ada tiga layer dengan peranan berbeza, dan setiap flag ada **penjelasan sensor**. Engineer boleh nilai sendiri sama ada ia real. Langkah seterusnya ialah kumpul **feedback operator** pada setiap flag — real, false, atau dah diketahui — untuk tune threshold.
 
 **"ADAbot guna AI apa? Selamat ke?"**
-> Model utama **Claude Sonnet melalui Databricks**, dengan **Qwen yang di-host oleh ICT TNB** sebagai fallback. Prinsipnya, LLM **tak kira nombor** — backend yang kira dari data sebenar. Untuk Telegram, hanya akaun dalam **allow-list** boleh guna, dan server tak buka port.
+> Model utama **Claude Sonnet melalui Databricks**, dengan **Qwen yang di-host oleh ICT TNB** sebagai fallback. Prinsipnya, LLM **tak kira nombor** — backend yang kira dari data sebenar.
 
 **"Data security / access?"**
 > Sign-in guna **TNB Active Directory**. Password tak disimpan. JEP ada **audit log** untuk setiap sign-in dan tindakan. Sistem berjalan dalam **rangkaian TNB**.

@@ -496,7 +496,7 @@ h3 { font-size: 22px; }
     </div>
     <div class="in d3" style="border:1px dashed rgba(177,140,255,.45); border-radius:12px; padding:12px 18px; display:flex; align-items:center; gap:14px; background:rgba(177,140,255,.06)">
       <span class="chip" style="border-color:rgba(177,140,255,.5)"><i style="background:var(--violet)"></i>ADAbot</span>
-      <span style="font-size:18px; color:var(--ink2)">AI assistant across the stack - asks the data in plain language, on web and Telegram</span>
+      <span style="font-size:18px; color:var(--ink2)">AI assistant across the stack - asks the data in plain language</span>
     </div>
     <div class="grid g5 in d4" style="grid-template-columns:repeat(5,1fr); gap:12px; margin-top:6px">
       <div class="card" style="padding:16px 16px"><div class="tag">Principle 1</div><p><b>Build on trusted data</b><br><span class="small">Proven pipelines stay untouched</span></p></div>
@@ -589,7 +589,7 @@ h3 { font-size: 22px; }
       <div class="card accent-c" style="padding:16px 18px"><div class="tag">Performance</div><p>Daily Summary · Trends · Expected heat-rate model</p></div>
       <div class="card accent-g" style="padding:16px 18px"><div class="tag">Reliability</div><p>UOR &amp; EUOF · Outage risk · Failure modes · Reconciliation</p></div>
       <div class="card accent-a" style="padding:16px 18px"><div class="tag">Fuel</div><p>Coal database · Blend Advisor · M5 Fineness Advisor · Stock yard · Demurrage</p></div>
-      <div class="card accent-v" style="padding:16px 18px"><div class="tag">AI</div><p>ADAbot chat · Daily Brief · Telegram bot</p></div>
+      <div class="card accent-v" style="padding:16px 18px"><div class="tag">AI</div><p>ADAbot chat · Daily Brief</p></div>
       <div class="callout" style="grid-column:1/-1;">Sign in once with your <b>TNB AD account</b>. Password is checked against AD and never stored.</div>
     </div>
   </div>
@@ -727,7 +727,7 @@ h3 { font-size: 22px; }
 </section>
 
 <!-- 11 · ADABOT -->
-<section class="slide sjsas" data-title="ADAbot" data-notes="ADAbot is the AI assistant. The key design decision: the language model never computes a number. It first plans which data tools to call, the backend runs those tools on real data, and only then does the model write the answer using those results. It runs on Claude through Databricks with TNB's own Qwen as fallback, and it is also available on Telegram, without opening any ports on the server.">
+<section class="slide sjsas" data-title="ADAbot" data-notes="ADAbot is the AI assistant. The key design decision: the language model never computes a number. It first plans which data tools to call, the backend runs those tools on real data, and only then does the model write the answer using those results. It runs on Claude through Databricks with TNB's own Qwen as fallback.">
   <div class="kicker in"><span class="dot" style="background:var(--violet); box-shadow:0 0 10px var(--violet)"></span>SJSAS · AI assistant</div>
   <h2 class="in d1">ADAbot: <span class="v">the LLM never computes a number</span></h2>
   <div class="body grid" style="grid-template-columns: 1fr 1fr; gap:24px">
@@ -738,7 +738,7 @@ h3 { font-size: 22px; }
         <div class="step" style="border-color:rgba(177,140,255,.35)"><b class="v">3 · Answer</b><span>The model writes a short answer using only those results</span></div>
       </div>
       <div class="grid g2 in d3" style="gap:12px">
-        <div class="card" style="padding:14px 16px"><div class="tag">Channels</div><p>Web chat · Daily Brief · Telegram (outbound only, allow-listed users)</p></div>
+        <div class="card" style="padding:14px 16px"><div class="tag">Channels</div><p>Web chat · Daily Brief</p></div>
         <div class="card" style="padding:14px 16px"><div class="tag">Models</div><p>Claude Sonnet on Databricks · fallback: TNB-hosted Qwen</p></div>
       </div>
       <div class="card in d4" style="padding:14px 16px"><div class="tag">Custom calculations</div><p>For authorised staff: sandboxed Python, code-checked before it runs, 20 s limit, no access to secrets.</p></div>
