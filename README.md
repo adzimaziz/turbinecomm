@@ -12,6 +12,7 @@ Practical use cases and insights from two in-house systems:
 | File | What it is |
 |---|---|
 | `index.html` | The 15-minute deck (9 slides). One self-contained file that works offline. |
+| [`Paper1_Handout.pdf`](Paper1_Handout.pdf) | Handout for distribution: the 9 slides plus the three L1 / L2 / L3 example charts (12 pages, no PIN). |
 | `Paper1_Digitalizing_Genco_OM_full.html` | Full 19-slide version, kept as a backup for Q&A. |
 | `icons/` | The 12 transparent 3D icons used in the deck. |
 | [`SCRIPT.md`](SCRIPT.md) | Full speaking script for every slide (Bahasa Melayu with English terms), timings, what to tap, and Q&A prep. |

@@ -1,5 +1,5 @@
 // Paper 1 deck - offline cache. Rebuilt by build_pwa.py; the version changes with the deck.
-const CACHE = 'paper1-8fa4823cbcf5';
+const CACHE = 'paper1-7a2100dd45e9';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {

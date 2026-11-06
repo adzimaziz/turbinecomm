@@ -210,6 +210,8 @@ GT & ST Community · Day 1 · 11:00 · Presenter: **Adzim Aziz** — Manager, Da
 >
 > Untuk **JEP**, kita tengok **anomaly feed**, **SHAP insight**, dan **sensor trend**.
 >
+> Untuk maklumat lanjut tentang kerja-kerja Advanced Data Analytics, layari **genco.tnb.com.my/ada**.
+>
 > Lepas demo, kita buka untuk **Q&A**. Terima kasih.
 
 ---
